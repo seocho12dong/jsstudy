@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+<style>
+  .shake {
+    padding: 10px 16px;
+    border: 2px solid #333;
+    background: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .shake:hover {
+    /* 애니메이션 적용 */
+    animation: shakeX 0.6s ease-in-out;
+  }
+
+  @keyframes shakeX {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-6px); }
+    50%  { transform: translateX(6px); }
+    75%  { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+  }
+  </style>
+</head>
+<body>
+    <button class="shake">흔들기</button>
+
+    <button id="game-button">버튼s</button>
+
+    <script>
+      
+      // $('#game-button').click(function() {
+      //   var a;
+        
+      // })
+
+      function test (a, b) {
+
+        if ((a < 0 || a > 100) || (b < 0 || b > 100))
+          alert('장난 ㄴㄴ')
+
+        if (a < 40 || b < 40) {
+          console.log('불합격')                    
+        }
+        else if (a + b < 120) {
+          console.log('불합격')                    
+        }
+        else
+          console.log('합격')          
+      }
+
+      
+
+      test(10, 500);
+
+    </script>
+</body>
+</html>

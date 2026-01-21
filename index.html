@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인하세요</h4>
+            <form action="success.html">
+                <div class="my-3">
+                    <input type="text" id="id_input_id" class="form-control">
+                </div>
+                <div class="my-3">
+                    <input type="password" id="id_input_pw" class="form-control">
+                </div>
+                <button type="submit" id="id-send" class="btn btn-primary">전송</button>
+                <button type="button" class="btn btn-danger" id="close">닫기</button>
+            </form>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark" id="darkMode">Dark 🔄</span>
+            <button class="navbar-toggler" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+    </ul>
+
+    <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="login" class="btn btn-danger">로그인</button>
+    </div>
+
+    <div class="alert alert-danger">
+        <span id= "alert-text">
+            5초 이내 구매시 사은품 증정!
+        </span>
+    </div>
+
+    <script>        
+    
+        setInterval(function() {
+            let num = parseInt(document.querySelector('#alert-text').textContent);
+
+            if (num > 0) {
+                num--;
+                document.querySelector('#alert-text').textContent = String(num) + '초 이내 구매시 사은품 증정!';
+            }
+            else
+                $('.alert').hide();
+        }, 1000)
+
+
+        setTimeout(function(){
+            $('.alert').hide();
+        }, 5000)
+
+        $('#darkMode').click(function() {
+            count++;
+            if (count % 2 == 1) {
+                $('#darkMode').text('Light 🔄');
+            }
+            else
+                $('#darkMode').text('Dark 🔄');
+        })
+        
+
+
+        $('#login').on('click', function () {
+            $('.black-bg').toggleClass('show');
+        })
+
+        $('#close').click(function () {
+            $('.black-bg').removeClass('show');
+        })
+
+
+
+        $('#id-send').click(function(e) {
+            if ($('#id_input_id').val() === '') {
+                alert('아이디를 입력하세요');
+                e.preventDefault();
+                return;
+            }
+
+            if ($('#id_input_pw').val() === '') {
+                alert('비밀번호를 입력하세요');
+                e.preventDefault();
+                return;
+            }
+
+            if ($('#id_input_pw').val().length < '6') {
+                alert('비밀번호를 더 길게 입력하세요');
+                e.preventDefault();
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test($('#id_input_id').val())) {
+                alert('이메일형식이 아님');
+                e.preventDefault();
+                return;
+            } 
+
+            if (!/[A-Z]]/.test($('#id_input_pw').val())) {
+                alert('알파벳이 대문자임');
+                e.preventDefault();
+                return;            }
+        })
+
+
+
+
+
+        document.querySelector('.navbar-toggler').addEventListener('click', function () {
+            document.querySelector('.list-group').classList.toggle('show-down');
+        })
+    </script>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
