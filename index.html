@@ -37,6 +37,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+        <div class="navbar-scroll"></div>
     </nav>
 
     <ul class="list-group">
@@ -52,15 +53,93 @@
         <button id="login" class="btn btn-danger">로그인</button>
     </div>
 
+    <div style="overflow: hidden;">
+        <div class="slide-container">
+            <div class="slide-box">
+                <img src="car1-1.png">
+            </div>
+            <div class="slide-box">
+                <img src="car2-1.png">
+            </div>
+            <div class="slide-box">
+                <img src="car3-1.png">
+            </div>
+        </div>
+    </div>
+
+    <button class="slide-next">다음</button>
+
     <div class="alert alert-danger">
-        <span id= "alert-text">
+        <span id="alert-text">
             5초 이내 구매시 사은품 증정!
         </span>
     </div>
 
-    <script>        
-    
-        setInterval(function() {
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">Lorem, ipsum dolor sit amet consectetur
+        adipisicing elit. Iusto eius quisquam quam, eos rem culpa in voluptatibus cumque amet voluptates omnis dolor
+        distinctio mollitia repellat nobis incidunt pariatur autem quo.</div>
+
+    <div style="height: 1000px;"></div>
+
+    <script>
+
+        ///모달창관련
+        document.querySelector('.black-bg').addEventListener('click', function(e) {
+            if (e.target == document.querySelector('.black-bg')) {
+                document.querySelector('.black-bg').classList.remove('show');
+            }
+        })
+
+
+
+
+        window.addEventListener('scroll', function () {
+            var sh = document.documentElement.scrollHeight
+            var sy = window.scrollY;
+            var ih = window.innerHeight;
+
+            var pc = sy / (sh - ih) * 100;
+
+            if (window.scrollY > 100) {
+                document.querySelector('.navbar-brand').style.fontSize = '20px';
+            }
+            else
+                document.querySelector('.navbar-brand').style.fontSize = '30px';
+
+
+            document.querySelector('.navbar-scroll').style.right = (100 - pc) + 'vw';
+        })
+
+        document.querySelector(".lorem").addEventListener('scroll', function () {
+            var st = document.querySelector(".lorem").scrollTop;
+            var sh = document.querySelector(".lorem").scrollHeight;
+            var ch = document.querySelector(".lorem").clientHeight;
+            if (st + ch + 10 >= sh) {
+                console.log('성공');
+                alert('다 읽음');
+            }
+        })
+
+        let slideNum = 0;
+        $('.slide-next').on('click', function () {
+            if (slideNum % 3 == 1) {
+                $('.slide-container').css('transform', 'translateX(-200vw)');
+                slideNum += 1;
+                return;
+            }
+
+            if (slideNum % 3 == 2) {
+                $('.slide-container').css('transform', 'translateX(+000vw)');
+                slideNum += 1;
+                return;
+            }
+
+            $('.slide-container').css('transform', 'translateX(-100vw)');
+            slideNum += 1;
+        })
+
+
+        setInterval(function () {
             let num = parseInt(document.querySelector('#alert-text').textContent);
 
             if (num > 0) {
@@ -72,11 +151,11 @@
         }, 1000)
 
 
-        setTimeout(function(){
+        setTimeout(function () {
             $('.alert').hide();
         }, 5000)
 
-        $('#darkMode').click(function() {
+        $('#darkMode').click(function () {
             count++;
             if (count % 2 == 1) {
                 $('#darkMode').text('Light 🔄');
@@ -84,7 +163,7 @@
             else
                 $('#darkMode').text('Dark 🔄');
         })
-        
+
 
 
         $('#login').on('click', function () {
@@ -97,7 +176,7 @@
 
 
 
-        $('#id-send').click(function(e) {
+        $('#id-send').click(function (e) {
             if ($('#id_input_id').val() === '') {
                 alert('아이디를 입력하세요');
                 e.preventDefault();
@@ -120,12 +199,13 @@
                 alert('이메일형식이 아님');
                 e.preventDefault();
                 return;
-            } 
+            }
 
             if (!/[A-Z]]/.test($('#id_input_pw').val())) {
                 alert('알파벳이 대문자임');
                 e.preventDefault();
-                return;            }
+                return;
+            }
         })
 
 
